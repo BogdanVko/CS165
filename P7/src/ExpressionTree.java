@@ -20,9 +20,39 @@ public class ExpressionTree extends ATree {
     public List<String> convert(Queue<String> infix) {
         List<String> postfix = new ArrayList<>();
         Deque<String> operators = new ArrayDeque<>(); // used as a stack
-        // YOUR CODE HERE
-        return new ArrayList<String>(Arrays.asList("10", "8", "2", "+", "*", "13", "32", "/", "5", "%", "-"));
-        //return postfix;
+        while (!infix.isEmpty()) {
+        	String token = infix.poll(); // take and save
+        	if (ATree.isInteger(token)) {
+        		postfix.add(token);
+        	}
+        	if(ATree.isOperator(token)) {
+        		while (!operators.isEmpty() &&
+        				(ATree.precedence(token) >= ATree.precedence(operators.peek()))
+						&& !operators.peek().equals("(")) {
+        			postfix.add(operators.pop());
+        		}
+        		operators.push(token);
+        	}
+        	
+        	if(token.equals("(")) {
+        		operators.push(token);
+        	}
+        	if(token.equals("")) {
+        		while (!operators.peek().equals("(")) {
+					postfix.add(operators.pop());
+				}
+				operators.pop();
+        		
+        	}
+        }
+        
+        if (infix.isEmpty()) {
+			while (!operators.isEmpty()) {
+				postfix.add(operators.pop());
+			}
+		}
+
+		return postfix;
     }
 
     @Override
@@ -106,11 +136,13 @@ public class ExpressionTree extends ATree {
      * @return the tokens in prefix order
      */
     public String prefixRecursive(Node current) {
-        // YOUR CODE HERE
+    	if (current.left == null) {
+			return current.token + " ";
+		}
 
-        return "";
-    }
+		return current.token + " " + prefixRecursive(current.left) + prefixRecursive(current.right);
 
+	}
     @Override
     public String infix() {
         return infixRecursive(root);
@@ -134,10 +166,12 @@ public class ExpressionTree extends ATree {
      * @return the tokens in infix order
      */
     public String infixRecursive(Node current) {
-        // YOUR CODE HERE
+    	if (current.left == null) {
+			return current.token;
+		}
 
-        return "";
-    }
+		return "(" + infixRecursive(current.left) + current.token + infixRecursive(current.right) + ")";
+	}
 
     @Override
     public String postfix() {
@@ -155,12 +189,16 @@ public class ExpressionTree extends ATree {
      * @return a String representing the tree in postfix order
      */
     public String postfixRecursive(Node current) {
-        // YOUR CODE HERE
+    	if (current.left == null) {
+			return current.token + " ";
+		}
 
-        return "";
-    }
+		return postfixRecursive(current.left) + postfixRecursive(current.right) + current.token + " ";
+
+	}
 
     public int evaluate() {
+    	
         return evaluateRecursive(root);
     }
 
