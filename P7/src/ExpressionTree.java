@@ -213,9 +213,36 @@ public class ExpressionTree extends ATree {
      * @return
      */
     public int evaluateRecursive(Node current) {
-        // YOUR CODE HERE
+		int ret = helpEval(current);
+		return ret;
+	}
 
-        return -1;
-    }
+	public int helpEval(Node current) {
+		if (current.left == null) {
+			return valueOf(current.token);
+		}
+		
+		String symb = current.token;
+		int result = 0;
+		switch (symb) {
+		case "+":
+			result = helpEval(current.left) + helpEval(current.right);
+			break;
+		case "-":
+			result = helpEval(current.left) - helpEval(current.right);
+			break;
+		case "*":
+			result = helpEval(current.left) * helpEval(current.right);
+			break;
+		case "/":
+			result = helpEval(current.left) / helpEval(current.right);
+			break;
+		case "%":
+			result = helpEval(current.left) % helpEval(current.right);
+			break;
+		}
+
+		return result;
+	}
 
 }
