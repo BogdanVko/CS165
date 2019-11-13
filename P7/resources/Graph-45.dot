@@ -1,0 +1,28 @@
+digraph BST {
+    ratio = 1.0;
+    node [style=filled]
+    node [fontname=Arial]
+    edge [arrowType=normal]
+    edge [fillcolor=orchid]
+    rootLL[label="10",shape=circle,fillcolor=lightseagreen]
+    rootLRL[label="8",shape=circle,fillcolor=lightseagreen]
+    rootLRR[label="2",shape=circle,fillcolor=lightseagreen]
+    rootLR [label="+",shape=square,fillcolor=lightskyblue]
+    rootLR -> rootLRL
+    rootLR -> rootLRR
+    rootL [label="*",shape=square,fillcolor=lightskyblue]
+    rootL -> rootLL
+    rootL -> rootLR
+    rootRLL[label="13",shape=circle,fillcolor=lightseagreen]
+    rootRLR[label="32",shape=circle,fillcolor=lightseagreen]
+    rootRL [label="/",shape=square,fillcolor=lightskyblue]
+    rootRL -> rootRLL
+    rootRL -> rootRLR
+    rootRR[label="5",shape=circle,fillcolor=lightseagreen]
+    rootR [label="\%",shape=square,fillcolor=lightskyblue]
+    rootR -> rootRL
+    rootR -> rootRR
+    root [label="-",shape=square,fillcolor=lightskyblue]
+    root -> rootL
+    root -> rootR
+}

@@ -1,0 +1,25 @@
+digraph BST {
+    ratio = 0.5;
+    node [style=filled]
+    node [fontname=Arial]
+    edge [arrowType=normal]
+    edge [fillcolor=orchid]
+    root    [label="/",shape=Mdiamond,fillcolor=orangered]
+    rootL   [label="+",shape=Mdiamond,fillcolor=orangered]
+    rootR   [label="%",shape=Mdiamond,fillcolor=orangered]
+    rootLL  [label="*",shape=Mdiamond,fillcolor=orangered]
+    rootLR  [label="16",shape=doubleoctagon,fillcolor=lightseagreen]
+    rootRL  [label="32",shape=doubleoctagon,fillcolor=lightseagreen]
+    rootRR  [label="20",shape=doubleoctagon,fillcolor=lightseagreen]
+    rootLLL [label="12",shape=doubleoctagon,fillcolor=lightseagreen]
+    rootLLR [label="10",shape=doubleoctagon,fillcolor=lightseagreen]
+    root -> rootL
+    root -> rootR
+    rootL -> rootLL
+    rootL -> rootLR
+    rootR -> rootRL
+    rootR -> rootRR
+    rootLL -> rootLLL
+    rootLL -> rootLLR
+    root -> rootR
+}
