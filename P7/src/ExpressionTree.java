@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**
- *
+ * Hi there!
  */
 public class ExpressionTree extends ATree {
 
@@ -37,7 +37,7 @@ public class ExpressionTree extends ATree {
         	if(token.equals("(")) {
         		operators.push(token);
         	}
-        	if(token.equals("")) {
+        	if(token.equals(")")) {
         		while (!operators.peek().equals("(")) {
 					postfix.add(operators.pop());
 				}
@@ -71,7 +71,8 @@ public class ExpressionTree extends ATree {
      *     <li> If the tree root is null, create a new node containing the token,
      *          assign it to the root, and return {@code true}.
      *     <li> If the right child of the current node is null, create a new node
-     *          with the token, place it in the right child, and return {@code true}.
+     *          with the t
+     *          oken, place it in the right child, and return {@code true}.
      *     <li> If the right child of the current node is an operator, make a recursive
      *          call passing the right child and token, and return true if successful,
      *          otherwise continue.
@@ -189,6 +190,7 @@ public class ExpressionTree extends ATree {
      * @return a String representing the tree in postfix order
      */
     public String postfixRecursive(Node current) {
+    	
     	if (current.left == null) {
 			return current.token + " ";
 		}

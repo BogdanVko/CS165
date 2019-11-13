@@ -204,7 +204,7 @@ public abstract class ATree {
      */
     public static int valueOf(String token) {
         try {
-            return(Integer.parseInt(token));
+            return( Integer.parseInt(token));
         } catch (NumberFormatException e) {
             return -1;
         }

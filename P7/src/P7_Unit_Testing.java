@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,7 +8,9 @@ import java.util.Queue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+@RunWith(JUnit4.class)
 class P7_Unit_Testing {
 
 	ExpressionTree eTree;
@@ -49,7 +52,6 @@ class P7_Unit_Testing {
 	void testBuildRecursiveRootNull() {
 		assertTrue(eTree.buildRecursive(eTree.root,""));
 	}
-	
 	@Test
 	void testBuildRecursiveRightNull() {
 		fail("Implement this test");
