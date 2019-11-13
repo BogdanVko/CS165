@@ -41,6 +41,7 @@ public class ExpressionTree extends ATree {
         		while (!operators.peek().equals("(")) {
 					postfix.add(operators.pop());
 				}
+        		
 				operators.pop();
         		
         	}

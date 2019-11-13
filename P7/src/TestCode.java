@@ -20,7 +20,11 @@ public class TestCode {
 
         String expression = args[0];
         System.out.println("Original Expression: " + expression);
+        System.out.println(4<2? "yes": "no");
+        
+        
 
+        
         // Verify parse
         Queue<String> infix = eTree.parse(expression);
         System.out.println("Infix Tokens: " + infix.toString());
