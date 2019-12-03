@@ -27,9 +27,9 @@ public class HashTable implements IHash {
      * @param hasher the type of hashing function
      */
     public HashTable(int numberOfBuckets, HashFunction hasher) {
-        this.numberOfBuckets = numberOfBuckets;
+       this.numberOfBuckets = numberOfBuckets;
        this.hasher = hasher;
-        hashTable = new ArrayList<List<String>>();
+       hashTable = new ArrayList<List<String>>();
         for (int i = 0; i < numberOfBuckets; i++) {
 			hashTable.add(new ArrayList<String>());
 		}
@@ -39,28 +39,36 @@ public class HashTable implements IHash {
     public boolean insert(String key) {
         if (hashTable.get(hasher.hash(key) % numberOfBuckets).contains(key)) {return false;}
        hashTable.get(hasher.hash(key) % numberOfBuckets).add(key);
+       numberOfElements++;
        return true;
         
     }
 
     public boolean remove(String key) {
-        // YOUR CODE HERE
+    	//if key is found
+    	if(hashTable.get(hasher.hash(key) % numberOfBuckets).contains(key)) {
+    		hashTable.get(hasher.hash(key) % numberOfBuckets).remove(key);
+    		return true;
+    		
+    	}
         return false;
     }
 
     public String search(String key) {
-        // YOUR CODE HERE
+    	if(hashTable.get(hasher.hash(key) % numberOfBuckets).contains(key)) {return key;}
         return null;
     }
 
     public int size() {
-        // YOUR CODE HERE
-        return 0;
+        return numberOfElements;
     }
 
     public int size(int index) {
-        // YOUR CODE HERE
-        return 0;
+        if (index < 0 || index > size()-1) {
+        	//should I do that?
+        	throw new IndexOutOfBoundsException();
+        }
+        return hashTable.get(index).size();
     }
 
     // Return iterator for the entire hashTable,
