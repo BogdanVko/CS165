@@ -1,8 +1,8 @@
 // Hasher.java - code for hashing class
-// Author: ?????
+// Author: Bogdan
 // Date:   ?????
 // Class:  CS165
-// Email:  ?????
+// Email:  vba@rams.colostate.edu
 
 @FunctionalInterface
 interface HashFunction {
@@ -49,14 +49,14 @@ public class Hasher {
             	prev = ret;
             	
             	}
-            	
         		
-        		return prev;
+        		
+        		return Math.abs(prev);
             };
 
         case "JAVA":
         	return (String key) -> {
-        		return key.hashCode();
+        		return Math.abs(key.hashCode());
         	};
 
         default:

@@ -3,7 +3,11 @@
 // Date:   ?????
 // Class:  CS165
 // Email:  ?????
-
+// Hasher.java - code for hashing class
+// Author: Bogdan
+// Date:   ?????
+// Class:  CS165
+// Email:  vba@rams.colostate.edu
 import java.util.*;
 
 public class HashTable implements IHash {
@@ -38,6 +42,7 @@ public class HashTable implements IHash {
 
     public boolean insert(String key) {
         if (hashTable.get(hasher.hash(key) % numberOfBuckets).contains(key)) {return false;}
+        
        hashTable.get(hasher.hash(key) % numberOfBuckets).add(key);
        numberOfElements++;
        return true;
@@ -48,6 +53,7 @@ public class HashTable implements IHash {
     	//if key is found
     	if(hashTable.get(hasher.hash(key) % numberOfBuckets).contains(key)) {
     		hashTable.get(hasher.hash(key) % numberOfBuckets).remove(key);
+    		numberOfElements--;
     		return true;
     		
     	}
@@ -64,7 +70,7 @@ public class HashTable implements IHash {
     }
 
     public int size(int index) {
-        if (index < 0 || index > size()-1) {
+        if (index < 0 || index > numberOfBuckets-1) {
         	//should I do that?
         	throw new IndexOutOfBoundsException();
         }
@@ -81,24 +87,49 @@ public class HashTable implements IHash {
 
         HashIterator() {
             // YOUR CODE HERE
+        	//start at index 0.
+        	currentIndex = 0;
+        	currentIterator = hashTable.get(currentIndex).iterator();
         }
 
 
         public String next() {
-            // YOUR CODE HERE
-            return null;
+           if (!hasNext()) {throw new IllegalStateException();}
+           
+           
+            return currentIterator.next();
         }
 
         public boolean hasNext() {
-            // YOUR CODE HERE
-            return false;
+            if (currentIterator.hasNext()){
+            	return true;
+            }
+            else {
+            	if (currentIndex+1 > hashTable.size()-1) {return false;}
+            	//find next non empty bucket
+            	currentIndex++;
+            	while (currentIndex != hashTable.size()-1) {
+            		if (!hashTable.get(currentIndex).isEmpty()) {
+						
+						currentIterator = hashTable.get(currentIndex).iterator();
+						return true;
+					}else {
+						currentIndex++;
+					}
+            		
+            	}
+            	return false;
+            	
+            	
+            	
+            }
         }
     }
 
     // Return an iterator for the hash table
     public Iterator<String> iterator() {
         // YOUR CODE HERE
-        return null;
+        return new HashIterator();
     }
 
     /**

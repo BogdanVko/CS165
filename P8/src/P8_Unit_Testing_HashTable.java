@@ -24,7 +24,7 @@ class P8_Unit_Testing_HashTable {
 	@BeforeEach
 	void init() {
 		testHash= new HashTable(5,Hasher.make(HASHER));
-		testIter = null;
+		
 		
 	}
 	
