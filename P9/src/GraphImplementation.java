@@ -4,12 +4,14 @@
 // Class:  CS165
 // Email:  ?????
 
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+
+
 
 public class GraphImplementation extends GraphAbstract {
 
@@ -97,7 +99,9 @@ public class GraphImplementation extends GraphAbstract {
     		 }		 
     	 }
     	 
-    	 
+    	Collections.sort(mileages);
+    	for(GraphNode city : cities)
+    	Collections.sort(city.edges);
     }
 
     public void writeGraph(String filename) {
@@ -144,20 +148,58 @@ public class GraphImplementation extends GraphAbstract {
 
     public void depthFirst(String startCity) {
         ArrayList<Integer> visited = new ArrayList<Integer>();
+        if(cities.contains(new GraphNode(startCity))) {
+        	int index = cities.indexOf(new GraphNode(startCity));
+        
+        	depthFirst(index, visited);
+        }
     }
 
     // Recursive helper method
     public void depthFirst(int index, ArrayList<Integer> visited) {
-        // YOUR CODE HERE
+        System.out.println("Visited " + cities.get(index).name);
+        visited.add(index);
+        
+        for(GraphEdge e: cities.get(index).edges) {
+        	
+        	if(!visited.contains(e.toIndex)) {
+        		depthFirst(e.toIndex, visited);
+        		
+        	}
+        }
     }
 
     public void breadthFirst(String startCity) {
-        // YOUR CODE HERE
+        ArrayList<Integer> visited = new ArrayList<Integer>();
+        int index = cities.indexOf(new GraphNode(startCity));// index
+        
+        visited.add(index);
+        
+        
+        Queue<Integer> q = new LinkedList<Integer>();
+        q.add(index);
+        
+        while(true) {
+        	if(q.isEmpty()) {
+        		break;
+        	}
+        	int el = q.poll();
+        	System.out.println("Visited " + cities.get(el).name);
+        	for(GraphEdge e: cities.get(el).edges) {
+        		if (!visited.contains(e.toIndex)) {
+        			q.add(e.toIndex);
+        			visited.add(e.toIndex);
+        			
+        		}
+        		
+        	}
+        	
+        }
     }
 
 
     public void shortestPath(String fromCity, String toCity) {
-        // YOUR CODE HERE
+    
     }
 
     // Helper functions
